@@ -3,6 +3,9 @@ from netmiko import ConnectHandler
 import threading
 import NMtcpdump
 
+#Note, for this script to run correctly, make sure that R2 and R3 both are configured to request DHCP AND!!! that 
+#They are sending their interface as their client ID!!!!
+
 def get_R5_address(host, username, password):
     R4 = {
                 "device_type": "cisco_ios",
@@ -55,6 +58,7 @@ def get_R3_and_4_address(host, username, password, pcap):
             if len(mac_addrs) < 2:
                 print(f"ERROR: coult not find at least 1 MAC address got {mac_addrs}")
                 return -1
+            #print(f"MAC addrs = {mac_addrs}")
             return mac_addrs
     except Exception as e:
         print(f"ERROR: {e}")
@@ -67,13 +71,31 @@ def connect_R5(host, username, password, r2mac, r3mac):
                 "password": password,
                 "secret": password
     }
+
+    config_r2_list = ['ip dhcp pool CLIENT_R2', 'host 198.51.102.11 255.255.255.0', f"client-identifier 01{r2mac}", 'exit']
+    config_r3_list = ['ip dhcp pool CLIENT_R3', 'host 198.51.102.12 255.255.255.0', f"client-identifier 01{r3mac}", 'exit']
+    config_r4_scope = ['ip dhcp excluded-address 198.51.102.1 198.51.102.5', 'ip dhcp pool R4_Network', 'network 198.51.102.0 255.255.255.0', 'exit']
     print(f"devices: {R5}")
 
     try:
         with ConnectHandler(**R5) as connection:
             #show the current state of the router and enter enable mode
-            output = connection.send_command('show ipv6 int br')
-            print(output)
+            try:
+                connection.send_config_set(config_r2_list)
+            except Exception as e:
+                print(f"could not configure R2: {e}")
+            try:
+                connection.send_config_set(config_r3_list)
+            except Exception as e:
+                print(f"could not configure R3: {e}")
+            try:
+                connection.send_config_set(config_r4_scope)
+            except Exception as e:
+                print(f"could not configure R4 scope: {e}")
+
+            output = connection.send_command('show ip dhcp binding')
+            print(f"output: {output}")
+
     except Exception as e:
         print(f"ERROR: {e}")
 

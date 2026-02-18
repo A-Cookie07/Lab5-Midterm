@@ -2,28 +2,69 @@
 import validateIPv4
 from easysnmp import Session
 
+def dec_to_hex(dec_string):
+    hex_address = ""
+    add_colon = False
+    for i in dec_string.split('.'):
+        # Note this isnt really a byte, but the idea is its going by every 2 hex digits, 
+        # and I don't know the word for that
+        cur_byte = str(hex(int(i))).split('x')[1]
+        if len(cur_byte) < 2:
+            cur_byte = '0'+cur_byte
+        hex_address += cur_byte
+
+        if (add_colon):
+            hex_address += ':'
+            add_colon = False
+        else:
+            add_colon = True
+    if len(hex_address) > 39:
+        hex_address = hex_address[:-(len(hex_address)-39)]
+    return str(hex_address)
+
 def main():
     #access_ip = []
     #while len(access_ip) < 5:
-        #cur_ip = input(f"Enter access IP for R{len(access_ip)+1} \n")
-        #if validateIPv4.isValidAddress(cur_ip):
-        #    access_ip.append(cur_ip)
-        #else:
-        #    print(f"ERROR: Invalid IP address, please check input and try again")
+    #    cur_ip = input(f"Enter access IP for R{len(access_ip)+1} \n")
+    #    if validateIPv4.isValidAddress(cur_ip):
+    #        access_ip.append(cur_ip)
+    #    else:
+    #        print(f"ERROR: Invalid IP address, please check input and try again")
     #access_ip = ['198.51.100.3','198.51.102.11','198.51.102.12','198.51.100.3','198.51.102.1','198.52.100.1']
+    access_ip = ['198.51.100.3']
 
-    #for ip in access_ip:
-    #    print(f"ip: {ip}")
-    #    session = Session(hostname=ip, community='private', version=2)
+    for ip in access_ip:
+        print(f"ip: {ip}")
+        session = Session(hostname=ip, community='private', version=2)
 
-    #    ip_address = session.walk('.1.3.6.1.2.1.2.2')
-    #    print(ip_address)
+        ip_address_list = session.walk('.1.3.6.1.2.1.4.34.1.3')
+        for address in ip_address_list:
+            print(address.oid)
+            print(address.value)
 
-    dec_string = '32.1.174.134.202.254.0.1.200.4.45.255.254.81.0.0'
-    hex_address = []
-    for i in dec_string.split('.'):
-        hex_address.append(str(hex(int(i))).split('x')[1])
-    print(hex_address)
+        ip_address_list = session.walk('.1.3.6.1.2.1.4.34.1.7')
+        for address in ip_address_list:
+            print(address.oid)
+            print(address.value)
+
+        ip_address_list = session.walk('.1.3.6.1.2.1.4.20.1')
+        for address in ip_address_list:
+            print(address.oid)
+            print(address.value)
+
+        ip_address_list = session.walk('.1.3.6.1.2.1.2.2.1.2')
+        for address in ip_address_list:
+            print(address.oid)
+            print(address.value)
+
+        cpu_util = session.get('.1.3.6.1.4.1.9.9.109.1.1.1.1.6.1')
+        print(f"CPU util: {cpu_util.value}")
+
+    #dec_string = '32.1.174.134.202.254.0.1.200.4.45.255.254.81.0.0'
+    #print(dec_to_hex(dec_string))
+    #dec_string = '254.128.0.0.0.0.0.0.200.4.45.255.254.81.0.0.18.0.0.3'
+    #print(dec_to_hex(dec_string))
+    
         
 
 
