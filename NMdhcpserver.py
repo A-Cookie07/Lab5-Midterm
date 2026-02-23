@@ -47,13 +47,13 @@ def get_R3_and_4_address(host, username, password, pcap):
             for i in output.split('\n'):
                 if 'global' in i:
                     print(f"address is {i.split(' ')[4]}")
-                    mac_addr = NMtcpdump.scrape_MAC(pcap , (i.split(' ')[4]).lower())
+                    mac_addr = NMtcpdump.scrape_MAC(pcap , mac_addrs)
                     mac_addrs.append(mac_addr)
             output = connection.send_command('show cdp entry R3 | include address: ')
             for i in output.split('\n'):
                 if 'global' in i:
                     print(f"address is {i.split(' ')[4]}")
-                    mac_addr = NMtcpdump.scrape_MAC(pcap , (i.split(' ')[4]).lower())
+                    mac_addr = NMtcpdump.scrape_MAC(pcap , mac_addrs)
                     mac_addrs.append(mac_addr)
             if len(mac_addrs) < 2:
                 print(f"ERROR: coult not find at least 1 MAC address got {mac_addrs}")
@@ -111,6 +111,7 @@ def main():
 
     address = get_R5_address(host, username, password)
     r2mac,r3mac = get_R3_and_4_address(host, username, password, pcap_file)
+    print(f"r2mac is {r2mac}")
     print(f"r3mac is {r3mac}")
     connect_R5(address, username, password, r2mac, r3mac)
 

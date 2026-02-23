@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 import validateIPv4
 from easysnmp import Session
+import time
+import matplotlib.pyplot as plt
 
 def dec_to_hex(dec_string):
     hex_address = ""
@@ -39,26 +41,60 @@ def main():
 
         ip_address_list = session.walk('.1.3.6.1.2.1.4.34.1.3')
         for address in ip_address_list:
-            print(address.oid)
+            oid_addr = str(address.oid.split("3.6.1.2.1.4.34.1.3")[1:])
+            oid_addr = oid_addr.split(".")[3:]
+            ip_addr = ""
+            for i in oid_addr:
+                ip_addr += f"{i}."
+            ip_addr = ip_addr[:-3]
+
+            if ip_addr.count(".") > 3:
+                ip_addr = dec_to_hex(ip_addr)
+
+            print(str(ip_addr))
             print(address.value)
 
         ip_address_list = session.walk('.1.3.6.1.2.1.4.34.1.7')
         for address in ip_address_list:
-            print(address.oid)
+            oid_addr = str(address.oid.split("3.6.1.2.1.4.34.1.7")[1:])
+            oid_addr = oid_addr.split(".")[3:]
+            ip_addr = ""
+            for i in oid_addr:
+                ip_addr += f"{i}."
+            ip_addr = ip_addr[:-3]
+
+            if ip_addr.count(".") > 3:
+                ip_addr = dec_to_hex(ip_addr)
+
+            print(str(ip_addr))
             print(address.value)
 
-        ip_address_list = session.walk('.1.3.6.1.2.1.4.20.1')
-        for address in ip_address_list:
-            print(address.oid)
-            print(address.value)
+        #ip_address_list = session.walk('.1.3.6.1.2.1.4.20.1')
+        #for address in ip_address_list:
+        #    print(address.oid)
+        #    print(address.value)
 
         ip_address_list = session.walk('.1.3.6.1.2.1.2.2.1.2')
         for address in ip_address_list:
-            print(address.oid)
-            print(address.value)
+            ip_addr = str(address.oid.split("3.6.1.2.1.2.2.1.2")[1])
 
-        cpu_util = session.get('.1.3.6.1.4.1.9.9.109.1.1.1.1.6.1')
-        print(f"CPU util: {cpu_util.value}")
+            print(ip_addr[1:])
+            print(address.value)
+        util = []
+        for i in range(0,24):
+            cpu_util = session.get('.1.3.6.1.4.1.9.9.109.1.1.1.1.6.1')
+            util.append(cpu_util.value)
+            #print(f"CPU util: {cpu_util.value}")
+            time.sleep(5)
+        
+        plt.plot(util)
+        plt.ylabel("Utilization")
+        plt.xlabel("Time")
+        plt.title("CPU Utilization in 5 second intervals")
+
+        plt.savefig('utilization.png', bbox_inches='tight')
+        plt.show()
+
 
     #dec_string = '32.1.174.134.202.254.0.1.200.4.45.255.254.81.0.0'
     #print(dec_to_hex(dec_string))
