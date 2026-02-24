@@ -3,9 +3,19 @@ from netmiko import ConnectHandler
 import threading
 import NMtcpdump
 
+##
+# Overview
+# This is meant to be ran as a script, not called from a different function
+# This process will get login info for ssh,
+# Connect to R4 and use the Cisco Discovery Protocol to get the address of R5
+# Scrape the MAC address of R2 and R3 from a given pcap file
+# Connecty to R5 using netmiko and configure DHCPv4 host reservations and a pool
+##
+
 #Note, for this script to run correctly, make sure that R2 and R3 both are configured to request DHCP AND!!! that 
 #They are sending their interface as their client ID!!!!
 
+#This function just goes in an gets the R5 ipv6 address from R4 using the Cisco Discovery Process
 def get_R5_address(host, username, password):
     R4 = {
                 "device_type": "cisco_ios",
@@ -29,6 +39,8 @@ def get_R5_address(host, username, password):
     except Exception as e:
         print(f"ERROR: {e}")
 
+# This function goes in an gets the ipv6 address of an icmpv6 echo request and converts it to a MAC
+# using the scrape_MAC function, then returns the mac addrs as a tuple
 def get_R3_and_4_address(host, username, password, pcap):
     R4 = {
                 "device_type": "cisco_ios",
@@ -63,6 +75,7 @@ def get_R3_and_4_address(host, username, password, pcap):
     except Exception as e:
         print(f"ERROR: {e}")
 
+# This function Connects to R5 and sends a config based on the given mac addresses
 def connect_R5(host, username, password, r2mac, r3mac):
     R5 = {
                 "device_type": "cisco_ios",
@@ -101,12 +114,12 @@ def connect_R5(host, username, password, r2mac, r3mac):
 
 
 def main():
-    #host = input("input ip address of host to get R4 address from:\n")
-    #username = input ("input username for R4\n")
-    #password = input ("input password for R4\n")
-    host = '198.51.100.3'
-    username = 'zaco6003'
-    password = 'cisco'
+    host = input("input ip address of host to get R4 address from:\n")
+    username = input ("input username for R4\n")
+    password = input ("input password for R4\n")
+    #host = '198.51.100.3'
+    #username = ''
+    #password = ''
     pcap_file = input("Enter the pcap file name: \n")
 
     address = get_R5_address(host, username, password)

@@ -5,12 +5,21 @@ import time
 import matplotlib.pyplot as plt
 import json
 
+##
+# Overview
+# Basically what this does is grabs the specific interface and address oids from the hosts defined
+# and returns them as a dictionary int text file form
+##
+
+# This is just a quick function to help convert the interface status function
 def get_if_status(status):
     if status == "1":
         return "up"
     else: 
         return "down"
 
+# This function converts the base ten value of the ipv6 address stored in the mib into a hex value
+# that can easily be read as an IP address
 def dec_to_hex(dec_string):
     hex_address = ""
     add_colon = False
@@ -21,25 +30,27 @@ def dec_to_hex(dec_string):
         if len(cur_byte) < 2:
             cur_byte = '0'+cur_byte
         hex_address += cur_byte
-
+    #Every 2 conversions, add a colon to make it ipv6
         if (add_colon):
             hex_address += ':'
             add_colon = False
         else:
             add_colon = True
+    
+    # chop off an trailing colons or any interface identifiers
     if len(hex_address) > 39:
         hex_address = hex_address[:-(len(hex_address)-39)]
     return str(hex_address)
 
 def main():
-    #access_ip = []
-    #while len(access_ip) < 5:
-    #    cur_ip = input(f"Enter access IP for R{len(access_ip)+1} \n")
-    #    if validateIPv4.isValidAddress(cur_ip):
-    #        access_ip.append(cur_ip)
-    #    else:
-    #        print(f"ERROR: Invalid IP address, please check input and try again")
-    access_ip = ['198.51.100.3','198.51.102.11','198.51.102.12','198.51.100.3','198.51.102.1','198.52.100.1']
+    access_ip = []
+    while len(access_ip) < 5:
+        cur_ip = input(f"Enter access IP for R{len(access_ip)+1} \n")
+        if validateIPv4.isValidAddress(cur_ip):
+            access_ip.append(cur_ip)
+        else:
+            print(f"ERROR: Invalid IP address, please check input and try again")
+    #access_ip = ['198.51.100.3','198.51.102.11','198.51.102.12','198.51.100.3','198.51.102.1','198.52.100.1']
     #access_ip = ['198.51.100.3']
 
     output_file = input("Enter output file name:\n")

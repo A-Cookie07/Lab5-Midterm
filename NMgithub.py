@@ -3,6 +3,15 @@ from git import Repo, RemoteProgress
 local_dir = "./"
 repo = Repo(local_dir)
 
+##
+# Overview
+# what this does is uses the git Python library to commit any new files / changes to files to the 
+# remote repository.  Basically this is the same as doing 
+# `git add .`
+# `git commit -m`
+# `git push`
+##
+
 def main():
     last_commit = repo.head.commit
     print(f"last commit was {last_commit.message}")
