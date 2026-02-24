@@ -12,7 +12,7 @@ repo = Repo(local_dir)
 # `git push`
 ##
 
-def main():
+def commit_to_github():
     last_commit = repo.head.commit
     print(f"last commit was {last_commit.message}")
     print(f"this_repo remotes {len(repo.remotes)}")
@@ -21,6 +21,9 @@ def main():
     message = input("input the commit message: \n")
     repo.index.commit(f"{message}")
     repo.remote("origin").push()
+
+def main():
+    commit_to_github()
 
 if __name__ == "__main__":
     main()
