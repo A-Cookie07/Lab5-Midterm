@@ -34,20 +34,19 @@ def main():
             access_ip.append(cur_ip)
         else:
             print(f"ERROR: Invalid IP address, please check input and try again")
-
     output_file = input("Enter output file name:\n")
-
     all_addresses = {}
     all_interfaces = {}
-
     for ip in access_ip:
         addresses, interfaces = NMsnmp.get_address_and_interface(ip)
-
     with open(output_file, 'w') as wptr:
         json.dump(all_addresses, wptr, ensure_ascii=False, indent=4)
         json.dump(all_interfaces, wptr, ensure_ascii=False, indent=4)
-
     NMsnmp.get_cpu_util()
+
+    #run the github function
+    NMgithub.commit_to_github()
+
 
 if __name__ == "__main__":
     main()
