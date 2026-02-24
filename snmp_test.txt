@@ -1,0 +1,297 @@
+{
+    "R4.zaco.com": {
+        "1": {
+            "name": "FastEthernet0/0",
+            "ips": [
+                "198.51.102.6",
+                "2001:ae86:cafe:0001:c804:2dff:fe51:0000",
+                "fe80:0000:0000:0000:c804:2dff:fe51:0000"
+            ]
+        },
+        "2": {
+            "name": "FastEthernet1/0",
+            "ips": [
+                "198.51.100.3",
+                "2001:ae86:cafe:0003:0000:0000:0000:0054",
+                "fe80:0000:0000:0000:c804:2dff:fe51:001c"
+            ]
+        },
+        "3": {
+            "name": "FastEthernet1/1",
+            "ips": [
+                "40.30.20.10"
+            ]
+        },
+        "4": {
+            "name": "GigabitEthernet2/0",
+            "ips": []
+        },
+        "5": {
+            "name": "VoIP-Null0",
+            "ips": []
+        },
+        "6": {
+            "name": "Null0",
+            "ips": []
+        }
+    },
+    "R2": {
+        "1": {
+            "name": "FastEthernet0/0",
+            "ips": [
+                "198.51.102.11",
+                "2001:ae86:cafe:0001:c802:2cff:fed0:0000",
+                "fe80:0000:0000:0000:c802:2cff:fed0:0000"
+            ]
+        },
+        "2": {
+            "name": "FastEthernet1/0",
+            "ips": [
+                "198.52.100.8",
+                "2001:ae86:cafe:0002:548b:2b8c:fb24:1f83",
+                "fe80:0000:0000:0000:c802:2cff:fed0:001c"
+            ]
+        },
+        "3": {
+            "name": "FastEthernet1/1",
+            "ips": []
+        },
+        "4": {
+            "name": "GigabitEthernet2/0",
+            "ips": []
+        },
+        "5": {
+            "name": "VoIP-Null0",
+            "ips": []
+        },
+        "6": {
+            "name": "Null0",
+            "ips": []
+        }
+    },
+    "R3": {
+        "1": {
+            "name": "FastEthernet0/0",
+            "ips": [
+                "198.51.102.12",
+                "2001:ae86:cafe:0001:c803:2dff:fe15:0000",
+                "fe80:0000:0000:0000:c803:2dff:fe15:0000"
+            ]
+        },
+        "2": {
+            "name": "FastEthernet1/0",
+            "ips": [
+                "198.52.100.9",
+                "2001:ae86:cafe:0002:3d33:5950:3615:fdd4",
+                "fe80:0000:0000:0000:c803:2dff:fe15:001c"
+            ]
+        },
+        "3": {
+            "name": "FastEthernet1/1",
+            "ips": []
+        },
+        "4": {
+            "name": "GigabitEthernet2/0",
+            "ips": []
+        },
+        "5": {
+            "name": "VoIP-Null0",
+            "ips": []
+        },
+        "6": {
+            "name": "Null0",
+            "ips": []
+        }
+    },
+    "R5.zaco.com": {
+        "1": {
+            "name": "FastEthernet0/0",
+            "ips": [
+                "198.51.102.1",
+                "2001:ae86:cafe:0001:c805:2dff:fe70:0000",
+                "fe80:0000:0000:0000:c805:2dff:fe70:0000"
+            ]
+        },
+        "2": {
+            "name": "FastEthernet1/0",
+            "ips": []
+        },
+        "3": {
+            "name": "FastEthernet1/1",
+            "ips": []
+        },
+        "4": {
+            "name": "GigabitEthernet2/0",
+            "ips": []
+        },
+        "5": {
+            "name": "VoIP-Null0",
+            "ips": []
+        },
+        "6": {
+            "name": "Null0",
+            "ips": []
+        }
+    },
+    "R1": {
+        "1": {
+            "name": "FastEthernet0/0",
+            "ips": []
+        },
+        "2": {
+            "name": "FastEthernet1/0",
+            "ips": [
+                "198.52.100.1",
+                "2001:ae86:cafe:0002:0000:0000:0000:0001",
+                "fe80:0000:0000:0000:c801:2cff:feb2:001c"
+            ]
+        },
+        "3": {
+            "name": "FastEthernet1/1",
+            "ips": []
+        },
+        "4": {
+            "name": "GigabitEthernet2/0",
+            "ips": []
+        },
+        "5": {
+            "name": "VoIP-Null0",
+            "ips": []
+        },
+        "6": {
+            "name": "Null0",
+            "ips": []
+        }
+    }
+}{
+    "R4.zaco.com": {
+        "1": {
+            "name": "FastEthernet0/0",
+            "status": "up"
+        },
+        "2": {
+            "name": "FastEthernet1/0",
+            "status": "up"
+        },
+        "3": {
+            "name": "FastEthernet1/1",
+            "status": "down"
+        },
+        "4": {
+            "name": "GigabitEthernet2/0",
+            "status": "down"
+        },
+        "5": {
+            "name": "VoIP-Null0",
+            "status": "up"
+        },
+        "6": {
+            "name": "Null0",
+            "status": "up"
+        }
+    },
+    "R2": {
+        "1": {
+            "name": "FastEthernet0/0",
+            "status": "up"
+        },
+        "2": {
+            "name": "FastEthernet1/0",
+            "status": "up"
+        },
+        "3": {
+            "name": "FastEthernet1/1",
+            "status": "down"
+        },
+        "4": {
+            "name": "GigabitEthernet2/0",
+            "status": "down"
+        },
+        "5": {
+            "name": "VoIP-Null0",
+            "status": "up"
+        },
+        "6": {
+            "name": "Null0",
+            "status": "up"
+        }
+    },
+    "R3": {
+        "1": {
+            "name": "FastEthernet0/0",
+            "status": "up"
+        },
+        "2": {
+            "name": "FastEthernet1/0",
+            "status": "up"
+        },
+        "3": {
+            "name": "FastEthernet1/1",
+            "status": "down"
+        },
+        "4": {
+            "name": "GigabitEthernet2/0",
+            "status": "down"
+        },
+        "5": {
+            "name": "VoIP-Null0",
+            "status": "up"
+        },
+        "6": {
+            "name": "Null0",
+            "status": "up"
+        }
+    },
+    "R5.zaco.com": {
+        "1": {
+            "name": "FastEthernet0/0",
+            "status": "up"
+        },
+        "2": {
+            "name": "FastEthernet1/0",
+            "status": "down"
+        },
+        "3": {
+            "name": "FastEthernet1/1",
+            "status": "down"
+        },
+        "4": {
+            "name": "GigabitEthernet2/0",
+            "status": "down"
+        },
+        "5": {
+            "name": "VoIP-Null0",
+            "status": "up"
+        },
+        "6": {
+            "name": "Null0",
+            "status": "up"
+        }
+    },
+    "R1": {
+        "1": {
+            "name": "FastEthernet0/0",
+            "status": "down"
+        },
+        "2": {
+            "name": "FastEthernet1/0",
+            "status": "up"
+        },
+        "3": {
+            "name": "FastEthernet1/1",
+            "status": "down"
+        },
+        "4": {
+            "name": "GigabitEthernet2/0",
+            "status": "down"
+        },
+        "5": {
+            "name": "VoIP-Null0",
+            "status": "up"
+        },
+        "6": {
+            "name": "Null0",
+            "status": "up"
+        }
+    }
+}

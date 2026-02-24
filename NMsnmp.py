@@ -125,7 +125,7 @@ def main():
     session = Session(hostname='198.52.100.1', community='private', version=2)
     for i in range(0,24):
         cpu_util = session.get('.1.3.6.1.4.1.9.9.109.1.1.1.1.6.1')
-        util.append(cpu_util.value)
+        util.append(int(cpu_util.value))
         #print(f"CPU util: {cpu_util.value}")
         time.sleep(5)
         
